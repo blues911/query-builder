@@ -4,9 +4,10 @@ namespace QueryBuilder;
 
 use QueryBuilder\Builder;
 
-class DB extends Builder
+class Connector extends Builder
 {
     protected $pdo;
+
     protected $config = [
         'driver' => '',
         'host' => '',
@@ -49,11 +50,13 @@ class DB extends Builder
     protected function checkConfig($config = [])
     {
         $result = array_diff_key($this->config, $config);
+
         if (count($result) > 0) {
             throw new \Exception('bad config keys');
         }
 
         $result = array_filter($config);
+
         if (empty($result) || count($result) != count($this->config)) {
             throw new \Exception('bad config values');
         }

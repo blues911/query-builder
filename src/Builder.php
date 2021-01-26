@@ -4,17 +4,18 @@ namespace QueryBuilder;
 
 class Builder
 {
-    protected $db;
-    protected $build;
+    protected $pdo;
 
-    public function __construct($db)
+    protected $bind;
+
+    public function __construct($pdo)
     {
-        $this->db = $db;
+        $this->pdo = $pdo;
     }
 
     public function query($sql)
     {
-        $this->build = $this->db->prepare($sql);
+        $this->bind = $this->pdo->prepare($sql);
         return $this;
     }
 
@@ -36,37 +37,37 @@ class Builder
             }
         }
 
-        $this->build->bindParam($key, $value, $type);
+        $this->bind->bindParam($key, $value, $type);
         return $this;
     }
 
     public function build()
     {
-        $this->build->execute();
+        $this->bind->execute();
         return $this;
     }
 
     public function fetch()
     {
-        $result = $this->build->fetch(\PDO::FETCH_ASSOC);
+        $result = $this->bind->fetch(\PDO::FETCH_ASSOC);
         return $result;
     }
 
     public function fetchAll()
     {
-        $result = $this->build->fetchAll(\PDO::FETCH_ASSOC);
+        $result = $this->bind->fetchAll(\PDO::FETCH_ASSOC);
         return $result;
     }
 
     public function count()
     {
-        $result = $this->build->rowCount();
+        $result = $this->bind->rowCount();
         return $result;
     }
 
     public function debugParams()
     {
-        $result = $this->build->debugDumpParams();
+        $result = $this->bind->debugDumpParams();
         return $result;
     }
 }

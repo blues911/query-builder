@@ -10,10 +10,12 @@ composer require smokehill/query-builder:dev-master
 
 ## Example
 
+QueryBuilder usage:
+
 ```php
 require('vendor/autoload.php');
 
-use QueryBuilder\DB;
+use QueryBuilder\Connector as DB;
 
 // init connection
 $db = new DB([
@@ -47,9 +49,11 @@ $db->query("SELECT * FROM users WHERE id=:id")
     ->setParam('id', 1)
     ->build()
     ->debugParams();
+```
 
-// Native PDO functions available via `call()` method.
-// See: https://www.php.net/manual/en/class.pdo.php
+Calling native [PDO](https://www.php.net/manual/en/class.pdo.php) functions:
+
+```php
 $db->call()->getAvailableDrivers();
 $db->call()->errorCode();
 $db->call()->errorInfo();
