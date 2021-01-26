@@ -41,6 +41,11 @@ class DB extends Builder
         parent::__construct($this->pdo);
     }
 
+    public function call()
+    {
+        return $this->pdo;
+    }
+
     protected function checkConfig($config = [])
     {
         $result = array_diff_key($this->config, $config);
@@ -54,10 +59,5 @@ class DB extends Builder
         }
 
         $this->config = $config;
-    }
-
-    public function lastInsertId()
-    {
-        return $this->pdo->lastInsertId();
     }
 }

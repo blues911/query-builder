@@ -48,3 +48,11 @@ $db->query("SELECT * FROM users WHERE id=:id")
     ->build()
     ->debugParams();
 ```
+
+Native [PDO]: https://www.php.net/manual/en/class.pdo.php functions available via `call()` method.
+
+```php
+$db->call()->getAvailableDrivers();
+$db->call()->errorCode();
+$db->call()->errorInfo();
+```
