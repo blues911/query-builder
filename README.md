@@ -4,8 +4,6 @@ Simple PDO wrapper for building native SQL queries.
 
 ## Install
 
-Requirements: PHP5.6 or higher.
-
 ```
 composer require smokehill/query-builder:dev-master
 ```
@@ -15,7 +13,7 @@ composer require smokehill/query-builder:dev-master
 ```php
 require('vendor/autoload.php');
 
-use QueryBuilder\Builder as DB;
+use QueryBuilder\DB;
 
 // init connection
 $db = new DB([
@@ -27,9 +25,6 @@ $db = new DB([
     'database' => 'test',
     'charset' => 'utf8'
 ]);
-
-// drivers list
-$db->getDrivers();
 
 // query all
 $db->query("SELECT * FROM users")
@@ -45,7 +40,7 @@ $db->query("SELECT * FROM users WHERE id=:id")
 // count
 $db->query("SELECT * FROM users")
     ->build()
-    ->rawCount();
+    ->count();
 
 // debug params
 $db->query("SELECT * FROM users WHERE id=:id")

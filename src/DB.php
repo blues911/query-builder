@@ -2,11 +2,12 @@
 
 namespace QueryBuilder;
 
-class Connection
-{
-    public $db;
+use QueryBuilder\Builder;
 
-    private $config = [
+class DB extends Builder
+{
+    protected $pdo;
+    protected $config = [
         'driver' => '',
         'host' => '',
         'port' => '',
@@ -16,12 +17,12 @@ class Connection
         'charset' => ''
     ];
 
-    public function __construct($params = [])
+    public function __construct($config = [])
     {
-        $this->checkConfig($params);
+        $this->checkConfig($config);
 
         try {
-            $this->db = new \PDO(
+            $this->pdo = new \PDO(
                 sprintf(
                     "%s:dbname=%s;host=%s;port=%s;charset=%s",
                     $this->config['driver'],
@@ -36,27 +37,27 @@ class Connection
         } catch (\PDOException $e) {
             throw new \Exception($e->getMessage() . '(' . $e->getLine() . ')');
         }
+
+        parent::__construct($this->pdo);
     }
 
-    public function getDrivers()
+    protected function checkConfig($config = [])
     {
-        return \PDO::getAvailableDrivers();
-    }
-
-    private function checkConfig($params = [])
-    {
-        $result = array_diff_key($this->config, $params);
-
+        $result = array_diff_key($this->config, $config);
         if (count($result) > 0) {
             throw new \Exception('bad config keys');
         }
 
-        $result = array_filter($params);
-
+        $result = array_filter($config);
         if (empty($result) || count($result) != count($this->config)) {
             throw new \Exception('bad config values');
         }
 
-        $this->config = $params;
+        $this->config = $config;
+    }
+
+    public function lastInsertId()
+    {
+        return $this->pdo->lastInsertId();
     }
 }

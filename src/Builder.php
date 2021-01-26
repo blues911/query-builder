@@ -2,11 +2,15 @@
 
 namespace QueryBuilder;
 
-use QueryBuilder\Connection;
-
-class Builder extends Connection
+class Builder
 {
+    protected $db;
     protected $build;
+
+    public function __construct($db)
+    {
+        $this->db = $db;
+    }
 
     public function query($sql)
     {
@@ -54,7 +58,7 @@ class Builder extends Connection
         return $result;
     }
 
-    public function rowCount()
+    public function count()
     {
         $result = $this->build->rowCount();
         return $result;
@@ -64,23 +68,5 @@ class Builder extends Connection
     {
         $result = $this->build->debugDumpParams();
         return $result;
-    }
-
-    public function startTransaction()
-    {
-        $this->build->beginTransaction();
-        return $this;
-    }
-
-    public function endTransaction()
-    {
-        $this->build->commit();
-        return $this;
-    }
-
-    public function resetTransaction()
-    {
-        $this->build->rollBack();
-        return $this;
     }
 }
