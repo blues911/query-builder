@@ -18,7 +18,7 @@ class Connection
 
     public function __construct($params = [])
     {
-        $this->check($params);
+        $this->checkConfig($params);
 
         try {
             $this->db = new \PDO(
@@ -38,17 +38,22 @@ class Connection
         }
     }
 
-    private function check($params)
+    public function getDrivers()
     {
-        $res = array_diff_key($this->config, $params);
+        return \PDO::getAvailableDrivers();
+    }
 
-        if (count($res) > 0) {
+    private function checkConfig($params = [])
+    {
+        $result = array_diff_key($this->config, $params);
+
+        if (count($result) > 0) {
             throw new \Exception('bad config keys');
         }
 
-        $res = array_filter($params);
+        $result = array_filter($params);
 
-        if (empty($res) || count($res) != count($this->config)) {
+        if (empty($result) || count($result) != count($this->config)) {
             throw new \Exception('bad config values');
         }
 

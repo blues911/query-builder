@@ -4,6 +4,8 @@ Simple PDO wrapper for building native SQL queries.
 
 ## Install
 
+Requirements: PHP5.6 or higher.
+
 ```
 composer require smokehill/query-builder:dev-master
 ```
@@ -11,7 +13,7 @@ composer require smokehill/query-builder:dev-master
 ## Example
 
 ```php
-require_once('vendor/autoload.php');
+require('vendor/autoload.php');
 
 use QueryBuilder\Builder as DB;
 
@@ -25,6 +27,9 @@ $db = new DB([
     'database' => 'test',
     'charset' => 'utf8'
 ]);
+
+// drivers list
+$db->getDrivers();
 
 // query all
 $db->query("SELECT * FROM users")

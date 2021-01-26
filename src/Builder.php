@@ -35,7 +35,7 @@ class Builder extends Connection
         $this->build->bindParam($key, $value, $type);
         return $this;
     }
-    
+
     public function build()
     {
         $this->build->execute();
@@ -77,7 +77,7 @@ class Builder extends Connection
         $this->build->commit();
         return $this;
     }
-    
+
     public function resetTransaction()
     {
         $this->build->rollBack();
