@@ -42,7 +42,7 @@ class Connector extends Builder
         parent::__construct($this->pdo);
     }
 
-    public function call()
+    public function pdo()
     {
         return $this->pdo;
     }

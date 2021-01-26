@@ -54,7 +54,7 @@ $db->query("SELECT * FROM users WHERE id=:id")
 Calling native [PDO](https://www.php.net/manual/en/class.pdo.php) functions:
 
 ```php
-$db->call()->getAvailableDrivers();
-$db->call()->errorCode();
-$db->call()->errorInfo();
+$db->pdo()->getAvailableDrivers();
+$db->pdo()->errorCode();
+$db->pdo()->errorInfo();
 ```
