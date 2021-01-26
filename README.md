@@ -1,6 +1,6 @@
 # QueryBuilder
 
-Simple PDO wrapper for building native SQL queries.
+PDO wrapper for building native SQL queries.
 
 ## Install
 
@@ -51,10 +51,11 @@ $db->query("SELECT * FROM users WHERE id=:id")
     ->debugParams();
 ```
 
-Calling native [PDO](https://www.php.net/manual/en/class.pdo.php) functions:
+[PDO Statements](https://www.php.net/manual/en/class.pdo.php) available via direct call:
 
 ```php
-$db->pdo()->getAvailableDrivers();
-$db->pdo()->errorCode();
-$db->pdo()->errorInfo();
+$db->errorCode();
+$db->errorInfo();
+$db->getAvailableDrivers();
+$db->getAttribute(\PDO::ATTR_CONNECTION_STATUS);
 ```

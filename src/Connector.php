@@ -42,9 +42,13 @@ class Connector extends Builder
         parent::__construct($this->pdo);
     }
 
-    public function pdo()
+    public function __call($func, $args)
     {
-        return $this->pdo;
+        if (!empty($func)) {
+            return call_user_func_array(array($this->pdo, $func), $args);
+        } else {
+            return $this->pdo->$func();
+        }
     }
 
     protected function checkConfig($config = [])
