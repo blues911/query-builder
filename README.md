@@ -10,12 +10,12 @@ composer require smokehill/query-builder:dev-master
 
 ## Example
 
-QueryBuilder usage:
+Usage:
 
 ```php
 require('vendor/autoload.php');
 
-use QueryBuilder\Connector as DB;
+use QueryBuilder\Builder as DB;
 
 // init connection
 $db = new DB([
