@@ -2,7 +2,7 @@
 
 PDO wrapper for building native SQL queries.
 
-NOTE: This package does not follow to best practices or something similar. It was developed for a testing purposes, to build quick and dirty SQL queries.
+> NOTE: This package does not follow to the best practice or something similar. It was developed for a testing purpose to build quick and dirty SQL queries.
 
 ## Install
 
@@ -21,7 +21,7 @@ use QueryBuilder\Builder as DB;
 
 // init connection
 $db = new DB([
-    'dns' => 'mysql:dbname=test;host=mysql;port=3306;charset=utf8'
+    'dsn' => 'mysql:dbname=test;host=localhost;port=3306;charset=utf8'
     'username' => 'root',
     'password' => 'password'
 ]);
@@ -43,9 +43,11 @@ $db->query("SELECT * FROM users")
     ->rowCount();
 
 // debug params
+$status = 1;
+$role = 'admin';
 $db->query("SELECT * FROM users WHERE status=:status AND role=:role")
-    ->setParam('status', 1)
-    ->setParam('role', 'admin')
+    ->setParam('status', $status)
+    ->setParam('role', $role)
     ->build()
     ->debugParams();
 ```
@@ -56,5 +58,4 @@ $db->query("SELECT * FROM users WHERE status=:status AND role=:role")
 $db->errorCode();
 $db->errorInfo();
 $db->getAvailableDrivers();
-$db->getAttribute(\PDO::ATTR_CONNECTION_STATUS);
 ```

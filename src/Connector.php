@@ -17,7 +17,7 @@ class Connector
      * @var array
      */
     protected $config = [
-        'dns' => '',
+        'dsn' => '',
         'username' => '',
         'password' => ''
     ];
@@ -33,7 +33,7 @@ class Connector
 
         try {
             $this->pdo = new \PDO(
-                $this->config['dns'],
+                $this->config['dsn'],
                 $this->config['username'],
                 $this->config['password']
             );

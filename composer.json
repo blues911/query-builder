@@ -1,15 +1,13 @@
 {
     "name": "smokehill/query-builder",
-    "type": "library",
-    "description": "Simple PDO wrapper for building native SQL queries.",
-    "keywords": ["pdo"],
+    "description": "PDO wrapper for building native SQL queries.",
+    "keywords": ["pdo", "query-builder"],
     "homepage": "https://github.com/smokehill/query-builder",
     "license": "MIT",
     "authors": [
         {
             "name": "Valera Padolochniy",
-            "email": "valera.padolochniy@gmail.com",
-            "role": "Developer"
+            "email": "valera.padolochniy@gmail.com"
         }
     ],
     "minimum-stability": "dev",
@@ -21,5 +19,8 @@
         "psr-4": {
             "QueryBuilder\\": "src/"
         }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^5"
     }
 }
