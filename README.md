@@ -21,13 +21,9 @@ use QueryBuilder\Builder as DB;
 
 // init connection
 $db = new DB([
-    'driver' => 'mysql',
-    'host' => 'localhost',
-    'port' => '3306',
-    'user' => 'root',
-    'password' => 'password',
-    'database' => 'test',
-    'charset' => 'utf8'
+    'dns' => 'mysql:dbname=test;host=mysql;port=3306;charset=utf8'
+    'username' => 'root',
+    'password' => 'password'
 ]);
 
 // query all

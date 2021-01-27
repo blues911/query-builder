@@ -17,13 +17,9 @@ class Connector
      * @var array
      */
     protected $config = [
-        'driver' => '',
-        'host' => '',
-        'port' => '',
-        'user' => '',
-        'password' => '',
-        'database' => '',
-        'charset' => ''
+        'dns' => '',
+        'username' => '',
+        'password' => ''
     ];
 
     /**
@@ -37,15 +33,8 @@ class Connector
 
         try {
             $this->pdo = new \PDO(
-                sprintf(
-                    "%s:dbname=%s;host=%s;port=%s;charset=%s",
-                    $this->config['driver'],
-                    $this->config['database'],
-                    $this->config['host'],
-                    $this->config['port'],
-                    $this->config['charset']
-                ),
-                $this->config['user'],
+                $this->config['dns'],
+                $this->config['username'],
                 $this->config['password']
             );
         } catch (\PDOException $e) {
@@ -80,12 +69,6 @@ class Connector
 
         if (count($result) > 0) {
             throw new \Exception('bad config keys');
-        }
-
-        $result = array_filter($config);
-
-        if (empty($result) || count($result) != count($this->config)) {
-            throw new \Exception('bad config values');
         }
 
         $this->config = $config;
