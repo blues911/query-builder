@@ -42,7 +42,7 @@ $db->query("SELECT * FROM users WHERE id=:id")
 // count
 $db->query("SELECT * FROM users")
     ->build()
-    ->count();
+    ->rowCount();
 
 // debug params
 $db->query("SELECT * FROM users WHERE status=:status AND role=:role")

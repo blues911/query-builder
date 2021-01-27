@@ -54,7 +54,7 @@ class Builder extends Connector
         return $result;
     }
 
-    public function count()
+    public function rowCount()
     {
         $result = $this->bind->rowCount();
         return $result;
