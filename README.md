@@ -2,6 +2,8 @@
 
 PDO wrapper for building native SQL queries.
 
+NOTE: This package does not follow to best practices or something similar. It was developed for a testing purposes, to build quick and dirty SQL queries.
+
 ## Install
 
 ```
