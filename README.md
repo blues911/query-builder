@@ -45,8 +45,9 @@ $db->query("SELECT * FROM users")
     ->count();
 
 // debug params
-$db->query("SELECT * FROM users WHERE id=:id")
-    ->setParam('id', 1)
+$db->query("SELECT * FROM users WHERE status=:status AND role=:role")
+    ->setParam('status', 1)
+    ->setParam('role', 'admin')
     ->build()
     ->debugParams();
 ```

@@ -2,16 +2,11 @@
 
 namespace QueryBuilder;
 
-class Builder
+use QueryBuilder\Connector;
+
+class Builder extends Connector
 {
-    protected $pdo;
-
     protected $bind;
-
-    public function __construct($pdo)
-    {
-        $this->pdo = $pdo;
-    }
 
     public function query($sql)
     {

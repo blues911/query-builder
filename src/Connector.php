@@ -2,9 +2,7 @@
 
 namespace QueryBuilder;
 
-use QueryBuilder\Builder;
-
-class Connector extends Builder
+class Connector
 {
     protected $pdo;
 
@@ -38,8 +36,6 @@ class Connector extends Builder
         } catch (\PDOException $e) {
             throw new \Exception($e->getMessage() . '(' . $e->getLine() . ')');
         }
-
-        parent::__construct($this->pdo);
     }
 
     public function __call($func, $args)
