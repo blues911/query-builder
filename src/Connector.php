@@ -4,8 +4,18 @@ namespace QueryBuilder;
 
 class Connector
 {
+    /**
+     * Instance of PDO.
+     * 
+     * @var object
+     */
     protected $pdo;
 
+    /**
+     * Connection parameters.
+     * 
+     * @var array
+     */
     protected $config = [
         'driver' => '',
         'host' => '',
@@ -16,6 +26,11 @@ class Connector
         'charset' => ''
     ];
 
+    /**
+     * Create database connection.
+     * 
+     * @param array $config
+     */
     public function __construct($config = [])
     {
         $this->checkConfig($config);
@@ -38,6 +53,13 @@ class Connector
         }
     }
 
+    /**
+     * Call native PDO Statement.
+     * 
+     * @param string $func
+     * @param array $args
+     * @return mixed
+     */
     public function __call($func, $args)
     {
         if (!empty($func)) {
@@ -47,6 +69,11 @@ class Connector
         }
     }
 
+    /**
+     * Check config parameters.
+     * 
+     * @param array $config
+     */
     protected function checkConfig($config = [])
     {
         $result = array_diff_key($this->config, $config);
