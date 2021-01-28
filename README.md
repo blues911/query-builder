@@ -21,7 +21,7 @@ use QueryBuilder\Builder as DB;
 
 // init connection
 $db = new DB([
-    'mysql:dbname=test;host=localhost;port=3306;charset=utf8'
+    'mysql:dbname=test;host=localhost;port=3306;charset=utf8',
     'root',
     'password'
 ]);
@@ -52,11 +52,36 @@ $db->query("SELECT * FROM users WHERE status=:status AND role=:role")
     ->debugParams();
 ```
 
-[PDO Statements](https://www.php.net/manual/en/class.pdo.php) available via direct call:
+Parameters binding:
+
+```php
+// array
+->bindParams(['key1', 'value1']);
+->bindParams(['key2', 'value2']);
+
+// multidimensional array
+->bindParams([
+    ['key1', 'value1'],
+    ['key2', 'value2']
+]);
+```
+
+Fetch result:
+
+```php
+// object
+->fetch();
+->fetchAll();
+
+// array
+->fetch(true);
+->fetchAll(true);
+```
+
+[PDO Statement](https://www.php.net/manual/en/class.pdo.php) available via direct call:
 
 ```php
 $db->errorCode();
 $db->errorInfo();
 $db->getAvailableDrivers();
-$db->getAttribute(\PDO::ATTR_SERVER_INFO);
 ```
