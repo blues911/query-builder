@@ -12,31 +12,15 @@ class Connector
     protected $pdo;
 
     /**
-     * Connection parameters.
-     * 
-     * @var array
-     */
-    protected $config = [
-        'dsn' => '',
-        'username' => '',
-        'password' => ''
-    ];
-
-    /**
      * Create database connection.
      * 
-     * @param array $config
+     * @param array $args
      */
-    public function __construct($config = [])
+    public function __construct($args = [])
     {
-        $this->checkConfig($config);
-
         try {
-            $this->pdo = new \PDO(
-                $this->config['dsn'],
-                $this->config['username'],
-                $this->config['password']
-            );
+            $reflector  = new \ReflectionClass('PDO');
+            $this->pdo = $reflector->newInstanceArgs($args);
         } catch (\PDOException $e) {
             throw new \Exception($e->getMessage() . '(' . $e->getLine() . ')');
         }
@@ -49,28 +33,12 @@ class Connector
      * @param array $args
      * @return mixed
      */
-    public function __call($func, $args)
+    public function __call($func, $args = [])
     {
         if (!empty($func)) {
-            return call_user_func_array(array($this->pdo, $func), $args);
+            return call_user_func_array([$this->pdo, $func], $args);
         } else {
             return $this->pdo->$func();
         }
-    }
-
-    /**
-     * Check config parameters.
-     * 
-     * @param array $config
-     */
-    protected function checkConfig($config = [])
-    {
-        $result = array_diff_key($this->config, $config);
-
-        if (count($result) > 0) {
-            throw new \Exception('bad config keys');
-        }
-
-        $this->config = $config;
     }
 }

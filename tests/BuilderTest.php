@@ -33,11 +33,7 @@ class BuilderTest extends TestCase
 
     protected function prepareDatabase()
     {
-        $db = new DB([
-            'dsn' => 'sqlite::memory:',
-            'username' => '',
-            'password' => ''
-        ]);
+        $db = new DB(['sqlite::memory:']);
 
         $st = $db->prepare("
             CREATE TABLE users (

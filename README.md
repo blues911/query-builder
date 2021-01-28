@@ -2,7 +2,7 @@
 
 PDO wrapper for building native SQL queries.
 
-> NOTE: This package does not follow to the best practice or something similar. It was developed for a testing purpose to build quick and dirty SQL queries.
+> This package does not follow to the best practice or something similar. It was developed for a testing purpose to build quick and dirty SQL queries.
 
 ## Install
 
@@ -21,9 +21,9 @@ use QueryBuilder\Builder as DB;
 
 // init connection
 $db = new DB([
-    'dsn' => 'mysql:dbname=test;host=localhost;port=3306;charset=utf8'
-    'username' => 'root',
-    'password' => 'password'
+    'mysql:dbname=test;host=localhost;port=3306;charset=utf8'
+    'root',
+    'password'
 ]);
 
 // query all
@@ -32,8 +32,9 @@ $db->query("SELECT * FROM users")
     ->fetchAll();
 
 // query one
+$id = 1;
 $db->query("SELECT * FROM users WHERE id=:id")
-    ->setParam('id', 1)
+    ->setParam('id', $id)
     ->build()
     ->fetch();
 

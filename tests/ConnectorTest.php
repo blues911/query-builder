@@ -7,11 +7,7 @@ class ConnectorTest extends TestCase
 {
     public function testConnection()
     {
-        $db = new DB([
-            'dsn' => 'sqlite::memory:',
-            'username' => '',
-            'password' => ''
-        ]);
+        $db = new DB(['sqlite::memory:']);
 
         $this->assertInternalType('object', $db);
     }
