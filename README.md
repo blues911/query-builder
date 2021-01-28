@@ -32,9 +32,8 @@ $db->query("SELECT * FROM users")
     ->fetchAll();
 
 // query one
-$id = 1;
 $db->query("SELECT * FROM users WHERE id=:id")
-    ->setParam('id', $id)
+    ->bindParams(['id', 1])
     ->build()
     ->fetch();
 
@@ -44,11 +43,11 @@ $db->query("SELECT * FROM users")
     ->rowCount();
 
 // debug params
-$status = 1;
-$role = 'admin';
 $db->query("SELECT * FROM users WHERE status=:status AND role=:role")
-    ->setParam('status', $status)
-    ->setParam('role', $role)
+    ->bindParams([
+        ['status', 1],
+        ['role', 'admin']
+    ])
     ->build()
     ->debugParams();
 ```
@@ -59,4 +58,5 @@ $db->query("SELECT * FROM users WHERE status=:status AND role=:role")
 $db->errorCode();
 $db->errorInfo();
 $db->getAvailableDrivers();
+$db->getAttribute(\PDO::ATTR_SERVER_INFO);
 ```

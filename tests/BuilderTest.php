@@ -8,6 +8,7 @@ class BuilderTest extends TestCase
     public function testFetchAll()
     {
         $db = $this->prepareDatabase();
+
         $users = $db->query("SELECT * FROM users")
             ->build()
             ->fetchAll();
@@ -20,11 +21,23 @@ class BuilderTest extends TestCase
     {
         $db = $this->prepareDatabase();
 
+        // fetch object
         $name = 'user1';
         $user = $db->query("SELECT * FROM users WHERE name=:name")
-            ->setParam(':name', $name)
+            ->bindParams(['name', $name])
             ->build()
             ->fetch();
+
+        $this->assertInternalType('object', $user);
+        $this->assertTrue(!empty($user));
+        $this->assertEquals($name, $user->name);
+
+        // fetch array
+        $name = 'user2';
+        $user = $db->query("SELECT * FROM users WHERE name=:name")
+            ->bindParams(['name', $name])
+            ->build()
+            ->fetch(true);
 
         $this->assertInternalType('array', $user);
         $this->assertTrue(!empty($user));

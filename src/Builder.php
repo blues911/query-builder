@@ -27,32 +27,20 @@ class Builder extends Connector
     }
 
     /**
-     * Bind SQL parameter.
+     * Bind SQL parameters.
      * 
-     * @param string $key
-     * @param int|bool|null|string $key
-     * @param null|int $type
+     * @param array $args
      * @return object
      */
-    public function setParam($key, $value, $type = null)
+    public function bindParams($args = [])
     {
-        if (is_null($type)) {
-            switch (true) {
-                case is_int($value):
-                    $type = \PDO::PARAM_INT;
-                    break;
-                case is_bool($value):
-                    $type = \PDO::PARAM_BOOL;
-                    break;
-                case is_null($value):
-                    $type = \PDO::PARAM_NULL;
-                    break;
-                default:
-                    $type = \PDO::PARAM_STR;
+        if (is_array(current($args))) {
+            foreach ($args as $arg) {
+                $this->bind->bindParam(...$arg);
             }
+        } else {
+            $this->bind->bindParam(...$args);
         }
-
-        $this->bind->bindParam($key, $value, $type);
 
         return $this;
     }
@@ -72,11 +60,13 @@ class Builder extends Connector
     /**
      * Fetch single record.
      * 
-     * @return array
+     * @param bool $type
+     * @return object|array
      */
-    public function fetch()
+    public function fetch($type = false)
     {
-        $result = $this->bind->fetch(\PDO::FETCH_ASSOC);
+        $number = $type ? \PDO::FETCH_ASSOC : \PDO::FETCH_OBJ;
+        $result = $this->bind->fetch($number);
 
         return $result;
     }
@@ -84,11 +74,13 @@ class Builder extends Connector
     /**
      * Fetch multiple records.
      * 
-     * @return array
+     * @param bool $type
+     * @return object|array
      */
-    public function fetchAll()
+    public function fetchAll($type = false)
     {
-        $result = $this->bind->fetchAll(\PDO::FETCH_ASSOC);
+        $number = $type ? \PDO::FETCH_ASSOC : \PDO::FETCH_OBJ;
+        $result = $this->bind->fetchAll($number);
 
         return $result;
     }
