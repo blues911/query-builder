@@ -9,7 +9,7 @@ PDO wrapper for building native SQL queries.
 ## Install
 
 ```
-composer require smokehill/query-builder:dev-master
+composer require smokehill/query-builder
 ```
 
 ## Example
