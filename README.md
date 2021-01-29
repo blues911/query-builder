@@ -1,4 +1,6 @@
-# QueryBuilder
+# Query Builder
+
+[![Build Status](https://travis-ci.com/smokehill/query-builder.svg?branch=master)](https://travis-ci.com/smokehill/query-builder)
 
 PDO wrapper for building native SQL queries.
 
