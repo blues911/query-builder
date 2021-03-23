@@ -1,8 +1,8 @@
 {
-    "name": "smokehill/query-builder",
+    "name": "blues911/query-builder",
     "description": "PDO wrapper for building native SQL queries.",
     "keywords": ["pdo", "query-builder"],
-    "homepage": "https://github.com/smokehill/query-builder",
+    "homepage": "https://github.com/blues911/query-builder",
     "license": "MIT",
     "authors": [
         {

@@ -1,6 +1,6 @@
 # Query Builder
 
-[![Build Status](https://travis-ci.com/smokehill/query-builder.svg?branch=master)](https://travis-ci.com/smokehill/query-builder)
+[![Build Status](https://travis-ci.com/blues911/query-builder.svg?branch=master)](https://travis-ci.com/blues911/query-builder)
 
 PDO wrapper for building native SQL queries.
 
@@ -9,7 +9,7 @@ PDO wrapper for building native SQL queries.
 ## Install
 
 ```
-composer require smokehill/query-builder
+composer require blues911/query-builder
 ```
 
 ## Example
