@@ -19,7 +19,7 @@ class Builder extends Connector
      * @param string $sql
      * @return object
      */
-    public function query($sql)
+    public function query(string $sql)
     {
         $this->bind = $this->pdo->prepare($sql);
 
@@ -29,17 +29,17 @@ class Builder extends Connector
     /**
      * Bind SQL parameters.
      * 
-     * @param array $args
+     * @param array $params
      * @return object
      */
-    public function bindParams($args = [])
+    public function bindParams(array $params)
     {
-        if (is_array(current($args))) {
-            foreach ($args as $arg) {
-                $this->bind->bindParam(...$arg);
+        if (is_array(current($params))) {
+            foreach ($params as $param) {
+                $this->bind->bindParam(...$param);
             }
         } else {
-            $this->bind->bindParam(...$args);
+            $this->bind->bindParam(...$params);
         }
 
         return $this;
@@ -60,29 +60,27 @@ class Builder extends Connector
     /**
      * Fetch single record.
      * 
-     * @param bool $type
+     * @param bool $isArray
      * @return object|array
      */
-    public function fetch($type = false)
+    public function fetch(bool $isArray = false)
     {
-        $number = $type ? \PDO::FETCH_ASSOC : \PDO::FETCH_OBJ;
-        $result = $this->bind->fetch($number);
+        $fetchType = $isArray ? \PDO::FETCH_ASSOC : \PDO::FETCH_OBJ;
 
-        return $result;
+        return $this->bind->fetch($fetchType);
     }
 
     /**
      * Fetch multiple records.
      * 
-     * @param bool $type
+     * @param bool $isArray
      * @return object|array
      */
-    public function fetchAll($type = false)
+    public function fetchAll(bool $isArray = false)
     {
-        $number = $type ? \PDO::FETCH_ASSOC : \PDO::FETCH_OBJ;
-        $result = $this->bind->fetchAll($number);
+        $fetchType = $isArray ? \PDO::FETCH_ASSOC : \PDO::FETCH_OBJ;
 
-        return $result;
+        return $this->bind->fetchAll($fetchType);
     }
 
     /**
@@ -92,9 +90,7 @@ class Builder extends Connector
      */
     public function rowCount()
     {
-        $result = $this->bind->rowCount();
-
-        return $result;
+        return $this->bind->rowCount();
     }
 
     /**
@@ -104,8 +100,6 @@ class Builder extends Connector
      */
     public function debugParams()
     {
-        $result = $this->bind->debugDumpParams();
-
-        return $result;
+        return $this->bind->debugDumpParams();
     }
 }
