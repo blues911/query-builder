@@ -14,31 +14,32 @@ class Connector
     /**
      * Create database connection.
      * 
-     * @param array $args
+     * @param array $params
+     * @throws \PDOException
      */
-    public function __construct($args = [])
+    public function __construct(array $params)
     {
         try {
-            $reflector  = new \ReflectionClass('PDO');
-            $this->pdo = $reflector->newInstanceArgs($args);
+            $reflector = new \ReflectionClass('PDO');
+            $this->pdo = $reflector->newInstanceArgs($params);
         } catch (\PDOException $e) {
-            throw new \Exception($e->getMessage() . '(' . $e->getLine() . ')');
+            throw $e;
         }
     }
 
     /**
      * Call native PDO Statement.
      * 
-     * @param string $func
-     * @param array $args
+     * @param string $method
+     * @param array $arguments
      * @return mixed
      */
-    public function __call($func, $args = [])
+    public function __call(string $method, array $arguments)
     {
-        if (!empty($func)) {
-            return call_user_func_array([$this->pdo, $func], $args);
+        if (!empty($arguments)) {
+            return call_user_func_array([$this->pdo, $method], $arguments);
         } else {
-            return $this->pdo->$func();
+            return $this->pdo->$method();
         }
     }
 }
