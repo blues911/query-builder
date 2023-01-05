@@ -6,15 +6,16 @@ class Connector
 {
     /**
      * Instance of PDO.
-     * 
+     *
      * @var object
      */
     protected $pdo;
 
     /**
      * Create database connection.
-     * 
+     *
      * @param array $params
+     *
      * @throws \PDOException
      */
     public function __construct(array $params)
@@ -29,9 +30,10 @@ class Connector
 
     /**
      * Call native PDO Statement.
-     * 
+     *
      * @param string $method
      * @param array $arguments
+     *
      * @return mixed
      */
     public function __call(string $method, array $arguments)

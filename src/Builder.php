@@ -8,15 +8,16 @@ class Builder extends Connector
 {
     /**
      * PDO Statement.
-     * 
+     *
      * @var object
      */
     protected $bind;
 
     /**
      * Prepare SQL query.
-     * 
+     *
      * @param string $sql
+     *
      * @return object
      */
     public function query(string $sql)
@@ -28,8 +29,9 @@ class Builder extends Connector
 
     /**
      * Bind SQL parameters.
-     * 
+     *
      * @param array $params
+     *
      * @return object
      */
     public function bindParams(array $params)
@@ -47,7 +49,7 @@ class Builder extends Connector
 
     /**
      * Execute SQL query.
-     * 
+     *
      * @return object
      */
     public function build()
@@ -59,8 +61,9 @@ class Builder extends Connector
 
     /**
      * Fetch single record.
-     * 
+     *
      * @param bool $isArray
+     *
      * @return object|array
      */
     public function fetch(bool $isArray = false)
@@ -72,8 +75,9 @@ class Builder extends Connector
 
     /**
      * Fetch multiple records.
-     * 
+     *
      * @param bool $isArray
+     *
      * @return object|array
      */
     public function fetchAll(bool $isArray = false)
@@ -85,7 +89,7 @@ class Builder extends Connector
 
     /**
      * Count rows.
-     * 
+     *
      * @return int
      */
     public function rowCount()
@@ -95,7 +99,7 @@ class Builder extends Connector
 
     /**
      * Debug parameters from bind.
-     * 
+     *
      * @return string
      */
     public function debugParams()
