@@ -13,8 +13,8 @@ class BuilderTest extends TestCase
             ->build()
             ->fetchAll();
 
-        $this->assertInternalType('array', $users);
-        $this->assertEquals(count($users), 2);
+        $this->assertIsArray($users);
+        $this->assertSame(2, count($users));
     }
 
     public function testFetch()
@@ -28,7 +28,7 @@ class BuilderTest extends TestCase
             ->build()
             ->fetch();
 
-        $this->assertInternalType('object', $user);
+        $this->assertIsObject($user);
         $this->assertTrue(!empty($user));
         $this->assertEquals($name, $user->name);
 
@@ -39,7 +39,7 @@ class BuilderTest extends TestCase
             ->build()
             ->fetch(true);
 
-        $this->assertInternalType('array', $user);
+        $this->assertIsArray($user);
         $this->assertTrue(!empty($user));
         $this->assertEquals($name, $user['name']);
     }

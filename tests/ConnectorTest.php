@@ -9,6 +9,6 @@ class ConnectorTest extends TestCase
     {
         $db = new DB(['sqlite::memory:']);
 
-        $this->assertInternalType('object', $db);
+        $this->assertIsObject($db);
     }
 }
